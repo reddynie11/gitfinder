@@ -6,7 +6,7 @@ class UserList extends React.Component{
 
     render(){
         if(this.props.loading){
-            return <h1>Loading...</h1>
+            return <div style={{display:'flex',flexDirection:"column",alignItems:'center',marginTop: '20%'}}><h1>Loading...</h1></div> 
         }else{
             return(
                 <div style={{
