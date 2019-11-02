@@ -28,13 +28,12 @@ class App extends React.Component {
  render(){
   return (
     <div className="">
-      <NavBar searchUsers={this.searchUsers} clearUsers={this.clearUsers}/>
+      <NavBar searchUsers={this.searchUsers} clearUsers={this.clearUsers} showClear={this.state.users.length>0 ? true : false}/>
       <div className='container'> 
-        <UserList 
-          loading={this.state.loading} 
-          users={this.state.users}
-          showClear={this.state.users.length>0 ? true : false}
-        />
+         {this.state.users.length>0 
+          ? <UserList loading={this.state.loading} users={this.state.users}  /> 
+          : null
+        }
       </div>
     </div>
   );
