@@ -32,7 +32,10 @@ class App extends React.Component {
       <div className='container'> 
          {this.state.users.length>0 
           ? <UserList loading={this.state.loading} users={this.state.users}  /> 
-          : null
+          : <div style={{display:'flex',flexDirection:"column",alignItems:'center',marginTop: '15%'}}>
+              <h3>Search for Github Profile's</h3>
+              <i className="fab fa-github-square fa-10x"></i> 
+            </div>
         }
       </div>
     </div>
