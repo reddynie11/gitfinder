@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import { BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import NavBar from './components/Navbar/Navbar';
-import UserList from './components/users/UserList'
+import UserList from './components/users/UserList';
+import HomeDisplay from './components/HomeDisplay';
 
 class App extends React.Component {
   state={
@@ -18,7 +20,7 @@ class App extends React.Component {
 
   searchUsers = async (text)=>{
     this.setState({ loading: true });
-    const fetchUsers = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_GIT_CLIENT_ID}&client_secret=${process.env.REACT_GIT_CLIENT_SECRET}`);
+    const fetchUsers = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.GIT_CLIENT_ID}&client_secret=${process.env.GIT_CLIENT_SECRET}`);
     //console.log(fetchUsers)
     this.setState({ users: fetchUsers.data.items , loading : false })
   }
@@ -27,18 +29,17 @@ class App extends React.Component {
 
  render(){
   return (
-    <div className="">
-      <NavBar searchUsers={this.searchUsers} clearUsers={this.clearUsers} showClear={this.state.users.length>0 ? true : false}/>
-      <div className='container'> 
-         {this.state.users.length>0 
-          ? <UserList loading={this.state.loading} users={this.state.users}  /> 
-          : <div style={{display:'flex',flexDirection:"column",alignItems:'center',marginTop: '15%'}}>
-              <h3>Search for Github Profile's</h3>
-              <i className="fab fa-github-square fa-10x"></i> 
-            </div>
-        }
-      </div>
-    </div>
+   <BrowserRouter>
+       <div>
+         <NavBar searchUsers={this.searchUsers} clearUsers={this.clearUsers} showClear={this.state.users.length>0 ? true : false}/>
+         
+            {this.state.users.length>0 
+              ? <UserList loading={this.state.loading} users={this.state.users}  /> 
+              : <HomeDisplay />
+            }
+
+        </div>
+   </BrowserRouter>
   );
  }
 }
