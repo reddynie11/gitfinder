@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 
 import NavBar from './components/Navbar/Navbar';
 import UserList from './components/users/UserList'
@@ -12,8 +12,8 @@ class App extends React.Component {
 
   async componentDidMount(){
     this.setState({ loading: true });
-    const fetchUsers = axios.get('https://api.github.com/users');
-    this.setState({ users: fetchUsers, loading : false })
+    const fetchUsers = await axios.get('https://api.github.com/users');
+    this.setState({ users: fetchUsers.data , loading : false })
   }
 
  render(){
