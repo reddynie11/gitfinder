@@ -6,7 +6,7 @@ class UserList extends React.Component{
 
     render(){
         if(this.props.loading){
-            return <i class="fab fa-github-square fa-10x"></i>
+            return <i className="fab fa-github-square fa-10x"></i>
         }else{
             return(
                 <div style={{

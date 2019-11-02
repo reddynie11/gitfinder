@@ -10,17 +10,32 @@ class App extends React.Component {
     loading: false
   }
 
-  async componentDidMount(){
+  // async componentDidMount(){
+  //   this.setState({ loading: true });
+  //   const fetchUsers = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_GIT_CLIENT_ID}&client_secret=${process.env.REACT_GIT_CLIENT_SECRET}`);
+  //   this.setState({ users: fetchUsers.data , loading : false })
+  // }
+
+  searchUsers = async (text)=>{
     this.setState({ loading: true });
-    const fetchUsers = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_GIT_CLIENT_ID}&client_secret=${process.env.REACT_GIT_CLIENT_SECRET}`);
-    this.setState({ users: fetchUsers.data , loading : false })
+    const fetchUsers = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_GIT_CLIENT_ID}&client_secret=${process.env.REACT_GIT_CLIENT_SECRET}`);
+    //console.log(fetchUsers)
+    this.setState({ users: fetchUsers.data.items , loading : false })
   }
+
+  clearUsers = ()=> this.setState({users:[]})
 
  render(){
   return (
     <div className="">
-      <NavBar/>
-      <div className='container'> <UserList loading={this.state.loading} users={this.state.users}/></div>
+      <NavBar searchUsers={this.searchUsers} clearUsers={this.clearUsers}/>
+      <div className='container'> 
+        <UserList 
+          loading={this.state.loading} 
+          users={this.state.users}
+          showClear={this.state.users.length>0 ? true : false}
+        />
+      </div>
     </div>
   );
  }
