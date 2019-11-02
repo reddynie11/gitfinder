@@ -12,12 +12,6 @@ class App extends React.Component {
     loading: false
   }
 
-  // async componentDidMount(){
-  //   this.setState({ loading: true });
-  //   const fetchUsers = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_GIT_CLIENT_ID}&client_secret=${process.env.REACT_GIT_CLIENT_SECRET}`);
-  //   this.setState({ users: fetchUsers.data , loading : false })
-  // }
-
   searchUsers = async (text)=>{
     this.setState({ loading: true });
     const fetchUsers = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.GIT_CLIENT_ID}&client_secret=${process.env.GIT_CLIENT_SECRET}`);
