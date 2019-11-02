@@ -20,7 +20,7 @@ class App extends React.Component {
   return (
     <div className="">
       <NavBar/>
-      <div className='container'> <UserList users={this.state.users}/></div>
+      <div className='container'> <UserList loading={this.state.loading} users={this.state.users}/></div>
     </div>
   );
  }
