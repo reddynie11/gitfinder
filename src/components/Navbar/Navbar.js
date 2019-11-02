@@ -17,12 +17,12 @@ class NavBar extends React.Component{
     render(){
         return(
             <Navbar bg="dark" variant="dark" sticky="top">
-                <Navbar.Brand href="#home">
+                <Navbar.Brand>
                     <i className='fab fa-github mx-2' />
                     <span>Github Profiles</span>
                 </Navbar.Brand>
                 <Form inline className="ml-auto" onSubmit={this.handleSubmit}>
-                    <FormControl type="text" placeholder="Search..." className="mr-sm-2" name="search" value={this.state.search} onChange={this.handleChange} />
+                    <FormControl type="text" placeholder="Search..." className="mr-sm-2" name="search" value={this.state.search} onChange={this.handleChange} required="true"/>
                      <Button variant="outline-info" type="submit" >Search</Button>
                  </Form>
                  {this.props.showClear && <Button variant="outline-warning" type="submit" className="ml-2" onClick={this.props.clearUsers}>Clear</Button>}
